@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess Rating Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 0 20px;
+      background: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+    }
+    .emoji {
+      text-align: center;
+      font-size: 3rem;
+    }
+    form {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+    .results {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .results h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 1rem;
+    }
+    td:last-child {
+      text-align: right;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="emoji">♟️</div>
+  <h1>Chess Rating Converter</h1>
+
+  <form method="POST">
+    <input type="text" name="username" placeholder="Enter Chess.com username" required>
+    <button type="submit">Get Ratings</button>
+  </form>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  {% if ratings %}
+    <div class="results">
+      <h2>{{ ratings.username }}</h2>
+      <table>
+        <tr><td>Chess.com Rapid</td><td>{{ ratings.chesscom }}</td></tr>
+        <tr><td>Lichess (est.)</td><td>{{ ratings.lichess }}</td></tr>
+        <tr><td>FIDE (est.)</td><td>{{ ratings.fide }}</td></tr>
+        <tr><td>USCF (est.)</td><td>{{ ratings.uscf }}</td></tr>
+      </table>
+    </div>
+  {% endif %}
+</body>
+</html>
